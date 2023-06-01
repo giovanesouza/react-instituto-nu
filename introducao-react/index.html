@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+</head>
+
+<body>
+
+    <!-- Container da aplicação -> onde a aplicação vai rodar -->
+    <div id="app"></div>
+
+    <!-- Criação dos components -->
+    <script>
+
+        // Cria o componente em forma de Class
+        // class Hello extends React.Component() {
+        //     // Sempre que um componente for criado por meio de classe, é obrigatório inserir o método render() {} 
+        //     render() {
+        //         return (
+        //             React.createElement('h1', {}, 'Olá, Mundo!')
+        //         )
+        //     }
+        // };
+
+
+        // Cria o componente em forma de Função
+        // function Hello() {
+        //     return (
+        //         React.createElement('h1', {}, 'Olá, Mundo!')
+
+        //         /* Cria o elemento desejado. Aceita vários argumentos, mas os 3 primeiros são os principais | 1º = Qual elemento será criado | 2º = atributos da tag (caso não tenha, inserir null ou {}) | 3º = Conteúdo (Elementos filhos) | 4º em diante passa a ser irmãos dos demais filhos 
+
+        //         Para criar elmementos filhos TAGS, utilizar -> React.createElement(). Para inserir apenas texto, inserir uma string.      */
+
+        //     )
+        // };
+
+        // parâmetros => desestruturação {} (propriedades / atributos) é um objeto que pode ter vários parâm..
+        function Hello({label, texto}) {
+            return (
+                React.createElement('h1', { id: 'titulo', className: 'cabecalho' },
+                    React.createElement('span', {}, texto),
+                    React.createElement('strong', {}, label),
+                    '!!!'
+
+                ) /* Cria um h1 com um filho span com texto 'olá', cria um strong após o span (ainda dentro da h1) => Resultado <h1 id='titulo' class='cabecalho'> <span>Olá, tudo bem? </span> <strong>Descomplica!</strong>!!! <h1>
+                    
+                Para adicionar classes ao elemento deve-se utilizar a palavra className, pois a palavra class é reservada no JS. Porém, será renderizada como class.    
+                    
+                */
+            )
+        };
+
+
+
+        // Renderiza
+        ReactDOM.render(
+              /* Aceita 2 argumentos. 1º = nome do componente | 2º = Onde será renderizado */
+            React.createElement(Hello, { texto: 'Olá, tudo bem? ' , label: 'Descomplica!'}), // passando atributos
+            document.querySelector('#app')
+        ); 
+      
+
+    </script>
+</body>
+
+</html>
