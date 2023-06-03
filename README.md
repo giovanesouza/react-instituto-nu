@@ -1,5 +1,6 @@
-# react-instituto-nu
-Repositório para salvar os códigos desenvolvidos ao longo da disciplina de React JS da formação em tecnologia do Instituto Nu.
+# React JS  - Instituto Nu
+
+Repositório para salvar os códigos desenvolvidos ao longo da disciplina de React JS da formação em tecnologia do Instituto Nu em parceria com a Descomplica.
 
 ## Conteúdos por pasta
 
@@ -30,3 +31,8 @@ Repositório para salvar os códigos desenvolvidos ao longo da disciplina de Rea
 
 ### React Hooks
 
+* State com componente em Classe e em Função
+* Usando hook useState
+* Ciclo de vida
+* Operações assíncronas
+* Criando seu próprio hook
