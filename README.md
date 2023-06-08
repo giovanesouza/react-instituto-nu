@@ -31,8 +31,17 @@ Repositório para salvar os códigos desenvolvidos ao longo da disciplina de Rea
 
 ### React Hooks
 
-* State com componente em Classe e em Função
-* Usando hook useState
-* Ciclo de vida
-* Operações assíncronas
-* Criando seu próprio hook
+* State com componente em Classe e em Função;
+* Usando hook useState;
+* Ciclo de vida;
+* Operações assíncronas;
+* Criando seu próprio hook.
+
+
+### Context API
+
+* Context API (Provider e Consumer);
+* Visão rápida de entender Render Props;
+* Passando função de estado no contexto;
+* Hook useContext;
+* Múltiplos context.
