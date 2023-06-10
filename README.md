@@ -45,3 +45,9 @@ Repositório para salvar os códigos desenvolvidos ao longo da disciplina de Rea
 * Passando função de estado no contexto;
 * Hook useContext;
 * Múltiplos context.
+
+
+### Formulários
+
+* Controlados (Real time);
+* Não controlados.

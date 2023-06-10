@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Estilização componente AssentoOnibus */
+.fileira {
+display: flex;
+}
+
+.assento {
+  list-style: none;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  background-color: green;
+  color: #fff;
+  margin: 2px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+/* Responsável em afastar os assentos centrais e formar o corredor */
+.assento:nth-child(2) {
+  margin-right: 20px;
+}
+
+/* Formatação quando o botão estiver desabilitado (assento selecionado ou já ocupado) */
+.assento:disabled {
+  background-color: #999;
+  color: #ccc;
+  cursor: not-allowed;
+}
