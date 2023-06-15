@@ -51,3 +51,10 @@ Repositório para salvar os códigos desenvolvidos ao longo da disciplina de Rea
 
 * Controlados (Real time);
 * Não controlados.
+
+---
+### Documentação React Bootstrap: para acessar [clique aqui](https://react-bootstrap.github.io/docs/getting-started/introduction)
+
+> Diferente do Bootstrap convencional, o React bootstrap abstrai o JS puro, possibilitando a utilização das funcionalidades do Bootstrap pensando apenas em components.
+
+---
