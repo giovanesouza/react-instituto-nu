@@ -58,3 +58,10 @@ Repositório para salvar os códigos desenvolvidos ao longo da disciplina de Rea
 > Diferente do Bootstrap convencional, o React bootstrap abstrai o JS puro, possibilitando a utilização das funcionalidades do Bootstrap pensando apenas em components.
 
 ---
+
+## inicio-projeto
+
+* SETUP (create-react-app + install react-bootstrap + estrutura);
+* Criando componente Card;
+* Criando componente Header;
+* ModalBase (children, controls)
