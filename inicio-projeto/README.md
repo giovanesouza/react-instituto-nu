@@ -308,22 +308,390 @@ export const HomePage = () => {
 
 ## Button/LoadingButton
 
+* Spinners: [Link bootstrap](https://react-bootstrap.github.io/docs/components/spinners)
+
+```jsx
+// Spinner de referência
+
+      <Button variant="primary" disabled>
+        <Spinner
+          as="span"
+          animation="border"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        />
+        <span className="visually-hidden">Loading...</span>
+      </Button>
+
+```
+
+> Na pasta **components**, criar pasta **Button** e arquivo **Button.js** dentro dela.
+
+
 ```jsx
 
+// Component Button.js
+
+// Importação dos Componentes Bootstrap
+import ButtonBS from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
+
+/* Props
+loading = boolean que vai carregar o spinner apenas se estiver true
+variant = estilização do botão
+disabled = boolean para habilitar/desabilitar o botão
+label = Texto padrão do botão (normal)
+loadingLabel = Texto quando o loading estiver true (carregando)
+onClick = Função que será executada ao clique
+*/
+export const Button = ({ loading, variant, disabled, label, loadingLabel, onClick }) => {
+    return (
+        <ButtonBS variant={variant} disabled={disabled} onClick={onClick}>
+
+            {/* Se verdadeiro, carrega o spinner - Operador ternário */}
+            {loading && (
+                // Fragment <> </> = utilizado para renderizar >1 component sem um pai
+                <>
+                    <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true">
+
+                        <span className="visually-hidden">Loading...</span>
+
+                    </Spinner> {' '} {/* esse espaço em branco é justamente p/ ter um espaçamento entre o loading e o texto do botão */}
+                </>
+            )}
+
+            {/* Texto do botão - Se estiver carregando, exibe o texto do loadingLabel, senão, o texto do label*/}
+            {
+                loading ? loadingLabel : label
+            }
+
+        </ButtonBS>
+    );
+}
 
 ```
 
 
 ```jsx
 
+// Alterações arquivo Modal.js
+
+// Importação do componente criado (Em vez do button do bootstrap)
+import {Button} from "../Button/Button";
+
+// Componente Modal com as Props do botão
+export const Modal = ({ title, children, open, controls = [] }) => {
+    return (
+        <ModalBS show={open} onHide={() => { }}>
+            <ModalBS.Header closeButton>
+                <ModalBS.Title>{title}</ModalBS.Title>
+            </ModalBS.Header>
+
+            {/* Children vai permitir a customização do modal conforme chamada */}
+            <ModalBS.Body> {children} </ModalBS.Body>
+
+            <ModalBS.Footer>
+
+                {/* Acessa o objeto do modal (passado na HomePage) -> Passa o conteúdo de forma dinâmica */}
+                {controls.map((controls, controlIndex) => (
+                    <Button
+                        key={controlIndex}
+                        variant={controls.variant}
+                        onClick={controls.onClick}
+                        label={"Salvar"}
+                        loadingLabel={"Salvando"}
+                        loading={true}
+                        disabled={true}
+                    />
+
+                ))}
+
+
+            </ModalBS.Footer>
+        </ModalBS>
+    );
+}
+
+
 
 ```
 
 
+## containers/ModalSavePin
+
+* List groups (**versão Flush**): [Link bootstrap](https://react-bootstrap.github.io/docs/components/list-group)
+
+> Na pasta **src** -> Criar pasta **Containers**, pasta **ModalSavePin** e arquivo **ModalSavePin.js**
 
 ```jsx
 
+// ModalSavePin.js
+
+// Importação do Modal Criado
+import { Modal } from "../../components/Modal/Modal";
+import { Button } from "../../components/Button/Button";
+
+// Importação components Bootstrap
+import ListGroup from 'react-bootstrap/ListGroup'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
+
+/* Props esperadas no Modal (component Modal.js)
+title, children, open, controls = []
+*/
+
+// A propriedade open deste component será passada na chmamada -> HomePage.js
+export const ModalSavePin = ({ open }) => {
+    return (
+        <Modal
+            title={"Salvar Pin"}
+            open={open}
+            controls={[
+              {
+                    label: 'Criar pasta',
+                    variant: 'secondary',
+                    loading: false,
+                    loadingLabel: 'Criando',
+                    onClick: () => {
+                        console.log('Clicou em Criar pasta');
+                    }
+                }
+            ]}>
+
+            {/* Component React Bootstrap */}
+            <ListGroup variant="flush">
+                
+                <ListGroup.Item>
+                    <Row>
+                        {/* Primeira coluna ocupa espaço de 8 colunas e a segunda o espaço de 4 colunas */}
+                        <Col xs={8}>Matemática</Col>
+                        <Col xs={4} className="text-end"> <Button label={"Salvar"} loadingLabel={"Salvando"}/></Col>
+                    </Row>
+                </ListGroup.Item>
+
+                <ListGroup.Item>
+                    <Row>
+                        {/* Primeira coluna ocupa espaço de 8 colunas e a segunda o espaço de 4 colunas */}
+                        <Col xs={8}>Matemática</Col>
+                        <Col xs={4} className="text-end"> <Button label={"Salvar"} loadingLabel={"Salvando"}/></Col>
+                    </Row>
+                </ListGroup.Item>
+
+            </ListGroup>
+
+        </Modal>
+    );
+}
+
 
 ```
+
+> Modal.js
+```jsx
+
+// Atualizações no Modal.js (Adição do controls para acessar as propriedades e passar valores sem quebrar a aplicação)
+
+                {/* Acessa o objeto do modal (passado na HomePage) -> Passa o conteúdo de forma dinâmica */}
+                {controls.map((control, controlIndex) => (
+                  <Button
+                        key={controlIndex}
+                        variant={control.variant}
+                        onClick={control.onClick}
+                        label={control.label}
+                        loadingLabel={control.loadingLabel}
+                        loading={control.loading}
+                        disabled={control.disabled}
+                    />
+
+                ))}
+
+
+```
+
+> HomePage.js
+```jsx
+
+// HomePage.js > Substituição modal anterior pelo ModalSavePin.js
+
+// Importação do ModalSavePin
+import { ModalSavePin } from "../../Containers/ModalSavePin/ModalSavePin";
+
+
+      <ModalSavePin open={true}/>
+
+```
+
+
+
+## containers/ModalCreateFolder
+
+* Form : [Link bootstrap](https://react-bootstrap.github.io/docs/forms/overview)
+
+> Na pasta **Containers**, criar pasta **ModalCreateFolder** e arquivo **ModalCreateFolder.js**
+
+
+> ModalCreateFolder.js
+```jsx
+
+// useState para Setar o nome das pastas
+import { useState } from 'react';
+
+
+// Components Bootstrap
+import Form from 'react-bootstrap/Form';
+
+
+// Component criado
+import { Modal } from "../../components/Modal/Modal";
+
+export const ModalCreateFolder = ({ open }) => {
+
+    // Utilizado para setar o nome das pastas
+    const [folderName, setFolderName] = useState('');
+
+
+    // Função que será invocada ao submeter o Form
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Fez o submit', folderName);
+    }
+
+
+    // Função para pegar o nome da pasta que será criada
+    const handleChange = (e) => {
+
+        setFolderName(e.target.value)
+    }
+
+    return (
+        <Modal
+            open={open}
+            title={"Criar pasta"}
+            controls={[
+                {
+                    label: 'Criar e Salvar',
+                    loadingLabel: 'Criando',
+                    variant: 'secondary',
+                    loading: false,
+                    type: 'submit', // propriedade para realizar a submissão do form
+                    form: 'form-criar-pasta', // propriedade que vai indicar qual formulário será submetido. Essa propriedade faz com que ocorra a submissão do form - (botão fora do form)
+                    onClick: () => { }
+                }
+            ]}
+
+        >
+
+
+            {/* Form com invoca função handleSubmit ao Submeter (Tem que ter um ID)*/}
+            <Form onSubmit={handleSubmit} id="form-criar-pasta">
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Nome da pasta</Form.Label>
+                    <Form.Control type="text" placeholder="Ex: Matemática" value={folderName} onChange={handleChange}/>
+
+                </Form.Group>
+
+            </Form>
+
+        </Modal>
+    );
+}
+
+
+```
+
+> HomePage.js
+```jsx
+
+// Importação do ModalCreateFolder
+import { ModalCreateFolder } from "../../Containers/ModalCreateFolder/ModalCreateFolder";
+
+      {/* Para testar o modal em questão */}
+      <ModalCreateFolder open={true} />
+
+
+```
+
+> Button: Alteração nas props -> Utilização do Operadores Rest e Spread
+```jsx
+
+
+// ...buttonProps = corresponde a todas as propriedades não passadas explicitamente
+export const Button = ({ loading, label, loadingLabel, ...buttonProps }) => {
+    return (
+
+        // variant={variant} disabled={disabled} onClick={onClick} e outras propriedades a serem passadas serão disparadas em ...buttonProps
+        <ButtonBS {...buttonProps}>
+
+            {/* Se verdadeiro, carrega o spinner - Operador ternário */}
+            {loading && (
+                // Fragment <> </> = utilizado para renderizar >1 component sem um pai
+                <>
+                    <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true">
+
+                        <span className="visually-hidden">Loading...</span>
+
+                    </Spinner> {' '} {/* esse espaço em branco é justamente p/ ter um espaçamento entre o loading e o texto do botão */}
+                </>
+            )}
+
+            {/* Texto do botão - Se estiver carregando, exibe o texto do loadingLabel, senão, o texto do label*/}
+            {
+                loading ? loadingLabel : label
+            }
+
+        </ButtonBS>
+    );
+}
+
+```
+
+
+> Modal.js: {...control}
+```jsx
+
+export const Modal = ({ title, children, open, controls = [] }) => {
+    return (
+        <ModalBS show={open} onHide={() => { }}>
+            <ModalBS.Header closeButton>
+                <ModalBS.Title>{title}</ModalBS.Title>
+            </ModalBS.Header>
+
+            {/* Children vai permitir a customização do modal conforme chamada */}
+            <ModalBS.Body> {children} </ModalBS.Body>
+
+            <ModalBS.Footer>
+
+                {/* Acessa o objeto do modal (passado na HomePage) -> Passa o conteúdo de forma dinâmica */}
+                {controls.map((control, controlIndex) => (
+                    <Button
+                        key={controlIndex}
+
+// ÁREA MODIFICADA
+                        // Todas as propriedades passadas em controls automaticamente serão passadas dinamicamente para o botão (não precisa ficar mapeando uma a uma)
+                        {...control}
+                    />
+
+                ))}
+
+
+            </ModalBS.Footer>
+        </ModalBS>
+    );
+}
+
+```
+
 
 

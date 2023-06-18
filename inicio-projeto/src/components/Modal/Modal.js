@@ -5,7 +5,9 @@ O Modal que está sendo importado fica armazenado em ModalBS (Alterar o nome cas
 
 // Importação dos componentes Bootstrap
 import ModalBS from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
+
+// Importação do componente criado
+import { Button } from "../Button/Button";
 
 // Prop open => Responsável pela exibição/fechamendo do modal
 // controls => Utilizada para customizar os botões do modal (Guarda a label, variant e uma função)
@@ -22,10 +24,14 @@ export const Modal = ({ title, children, open, controls = [] }) => {
             <ModalBS.Footer>
 
                 {/* Acessa o objeto do modal (passado na HomePage) -> Passa o conteúdo de forma dinâmica */}
-                {controls.map((controls, controlIndex) => (
-                    <Button key={controlIndex} variant={controls.variant} onClick={controls.onClick}>
-                        {controls.label}
-                    </Button>
+                {controls.map((control, controlIndex) => (
+                    <Button
+                        key={controlIndex}
+
+                        // Todas as propriedades passadas em controls automaticamente serão passadas dinamicamente para o botão (não precisa ficar mapeando uma a uma)
+                        {...control}
+                    />
+
                 ))}
 
 

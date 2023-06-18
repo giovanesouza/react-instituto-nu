@@ -64,4 +64,7 @@ Repositório para salvar os códigos desenvolvidos ao longo da disciplina de Rea
 * SETUP (create-react-app + install react-bootstrap + estrutura);
 * Criando componente Card;
 * Criando componente Header;
-* ModalBase (children, controls)
+* ModalBase (children, controls);
+* Button/LoadingButton;
+* containers/ModalSavePin;
+* containers/ModalCreateFolder.
