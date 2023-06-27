@@ -68,3 +68,14 @@ Repositório para salvar os códigos desenvolvidos ao longo da disciplina de Rea
 * Button/LoadingButton;
 * containers/ModalSavePin;
 * containers/ModalCreateFolder.
+
+
+## projeto-p2
+ 
+ ### Commit 1
+ * React portals;
+ * Criando componente Notification;
+ * react-router-dom;
+ * Configurando rotas e Definindo link entre rotas;
+ * Criando página Minhas Pastas e Componente ListGroup;
+
