@@ -79,3 +79,10 @@ Repositório para salvar os códigos desenvolvidos ao longo da disciplina de Rea
  * Configurando rotas e Definindo link entre rotas;
  * Criando página Minhas Pastas e Componente ListGroup;
 
+### Commit 2
+* getFolders (chamando direto no useEffect);
+* AddFolder;
+* AddPinInFolder;
+* Criando Context principal;
+* Código menos VERBOSO - Com useContext
+

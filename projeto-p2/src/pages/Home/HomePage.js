@@ -1,10 +1,3 @@
-/* 
-../ => Volta p/ pasta Home
-../ => volta p/ src
-/components/Card/Card => Entra na pasta components > Card e pega o Componente
-*/
-
-
 
 // Importação dos componentes Booststrap
 import Container from "react-bootstrap/Container";
@@ -24,7 +17,15 @@ import { ModalSavePin } from "../../Containers/ModalSavePin/ModalSavePin";
 import { Notification } from "../../components/Notification/Notification";
 
 
+// Importação do context por meio do useAppContext
+import { useAppContext } from "../../store/AppContext";
+
+
 export const HomePage = () => {
+
+  // Guarda as informações do contexto
+  const value = useAppContext();
+
   return (
     <div>
 
@@ -42,8 +43,10 @@ export const HomePage = () => {
         <Row>
           {/* xs (versão menor) = cada card ocupará 12 colunas | md (média p/ cima)= 2 colunas*/}
           <Col xs={12} md={2}>  <Card title={"Matemática"} image={"https://picsum.photos/200/300?53"} total={0} />  </Col>
-          <Col xs={12} md={2}>  <Card title={"Trigonometria"} image={"https://picsum.photos/200/300?13"} total={1} />  </Col>
-          <Col xs={12} md={2}>  <Card title={"Matemática"} image={"https://picsum.photos/200/300?53"} total={0} />  </Col>
+
+          {/* UTILIZANDO O CONTEXT */}
+          <span>{value.name}</span>
+
           <Col xs={12} md={2}>  <Card title={"Trigonometria"} image={"https://picsum.photos/200/300?13"} total={1} />  </Col>
         </Row>
       </Container>
